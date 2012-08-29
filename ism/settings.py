@@ -12,7 +12,7 @@ MANAGERS=ADMINS
 DATABASES={
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',# Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': r'D:\wip folder\temp folder\new\phython\ism\resources\ism.db',# Or path to database file if using sqlite3.
+        'NAME': r'C:/ank/poc/ism/resources/ism.db',# Or path to database file if using sqlite3.
         'USER': 'admin',# Not used with sqlite3.
         'PASSWORD': 'admin',# Not used with sqlite3.
         'HOST': 'admin',# Set to empty string for localhost. Not used with sqlite3.
@@ -70,6 +70,7 @@ STATICFILES_DIRS=(
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    r'C:/ank/poc/ism/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -109,7 +110,7 @@ TEMPLATE_DIRS=(
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "D:/wip folder/temp folder/new/phython/ism/templates",
+    "C:/ank/poc/ism/templates",
     
 )
 
