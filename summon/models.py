@@ -1,7 +1,8 @@
-from django.db import models
 from ctypes.wintypes import BOOLEAN
-import datetime
+from django.db import models
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
+
 
 
 # Create your models here.
@@ -41,10 +42,10 @@ class Summon(models.Model):
     isDue.short_description='in due  ?'
     
     def __unicode__(self):
-        return self.partyName
+        return self.sno
   
 class Reminder(models.Model):
-    summon=models.ForeignKey(Summon);
+    summon=models.ForeignKey(Summon,limit_choices_to = {'completionDataAndTime__lte': timezone.now().date(),'status__in':['RECEIVED_PARTIALLY','SENT']});
     isTelephone=models.BooleanField();
     isReminder=models.BooleanField();
     notificationDate=models.DateField();

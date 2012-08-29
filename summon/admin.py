@@ -3,23 +3,14 @@ from summon.models import Summon,Reminder
 from django.contrib import admin
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.core import serializers
 
 def print_summon(modeladmin,request,queryset):
     print("coming in print_summon ")
-    value=""
     for obj in queryset:
-        value=obj
+        pass;
     return render_to_response('summon.html',{'SummonName': obj})   
 print_summon.short_description="print summon"
-
-
-def send_reminder(modeladmin,request,queryset):
-    print("coming in print_summon ")
-    for obj in queryset:
-        print(obj);
-    return HttpResponse("Welcome to home ")   
-send_reminder.short_description="send reminder"
-
 
 def add_penality(modeladmin,request,queryset):
     print("coming in print_summon ")
@@ -58,5 +49,14 @@ class SummonAdmin(admin.ModelAdmin):
             'fields': ('option1','option2','option3','option4')
         }),
     )
+    
+class ReminderAdmin(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        print('coming in save model baby')
+        obj.save() 
+        pass
 admin.site.register(Summon,SummonAdmin);
-admin.site.register(Reminder);
+admin.site.register(Reminder,ReminderAdmin);
+
+
+
