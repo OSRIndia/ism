@@ -2,6 +2,7 @@ from ctypes.wintypes import BOOLEAN
 from django.db import models
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
+from django import forms
 
 
 
@@ -44,7 +45,7 @@ class Summon(models.Model):
     def __unicode__(self):
         return self.sNo.__str__()
   
-
-    
-     
-    
+class SummonForm(forms.ModelForm):
+        class Meta:
+            model = Summon
+            fields=('sNo','partyName','incaseOf','status','IssueDate','DueDate',)   

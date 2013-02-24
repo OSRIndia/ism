@@ -1,9 +1,38 @@
 from django.utils import timezone
-from summon.models import Summon
+from summon.models import Summon, SummonForm
 #from summon.reminder import Reminder
 from django.contrib import admin
 from django.shortcuts import render_to_response
 import datetime
+from django.forms.formsets import formset_factory
+from django.core import serializers
+
+
+def print_list(modeladmin,request,queryset):
+    print("coming in print_list ")
+    list_display=('sNo','partyName','incaseOf','status','IssueDate','DueDate','isDue',)
+    data = serializers.serialize( "python", queryset,fields=list_display )
+    print (data)
+    return render_to_response('printList.html',{'forlist': data,'fieldList':list_display})   
+print_list.short_description="List Print"
+
+def print_list2(modeladmin,request,queryset):
+    print("coming in print_list2 ")
+    list_display=('sNo','partyName','incaseOf','status','IssueDate','DueDate','isDue',)
+    data=[]
+    for obj in queryset:
+        form=SummonForm(instance=obj)
+        data.append(form)
+    print(data)
+    return render_to_response('printList.html',{'forlist': data,'fieldList':list_display})   
+print_list2.short_description="List Print2"
+
+def print_list3(modeladmin,request,queryset):
+    print("coming in print_list3 ")
+    list_display=('sNo','partyName','incaseOf','status','IssueDate','DueDate','isDue',)
+    return render_to_response('printList.html',{'forlist': queryset,'fieldList':list_display})   
+print_list3.short_description="List Print3"
+
 
 
 def print_summon(modeladmin,request,queryset):
@@ -99,7 +128,7 @@ class SummonAdmin(admin.ModelAdmin):
     ordering=('-sNo',)
     list_filter=('sNo','partyName','incaseOf','status')
     search_fields=['sNo','partyName',]
-    actions=[print_summon,enter_receipt_patial,enter_receipt_fully,add_penalty,reminder_telephone,reminder_letter]
+    actions=[print_list3,print_list2,print_list,print_summon,enter_receipt_patial,enter_receipt_fully,add_penalty,reminder_telephone,reminder_letter]
     #fields = ('sno', 'partyName', 'incaseOf','status')
     fieldsets=(
         (None,{

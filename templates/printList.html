@@ -1,0 +1,36 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/changelists.css" />
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+</head>	
+<body>
+<div class="result" id="changelist">
+
+<table id="result_list">
+<thead>
+<tr>
+	{% for form in fieldList %}
+  	<th>{{ form|capfirst }}</th>	
+    {% endfor %}
+</tr>
+</thead>
+{% for instance in forlist %}
+<tr class="{% cycle row1,row2 %}">
+	<td>{{instance.pk}}</td>
+	<td>{{instance.partyName}}</td>
+	<td>{{instance.incaseOf}}</td>
+	<td>{{instance.status}}</td>
+	<td>{{instance.IssueDate}}</td>
+	<td>{{instance.DueDate}}</td>
+	<td>{{instance.isDue}}</td>
+	</tr>
+ {% endfor %}
+
+
+  
+
+</table>
+</div>
+</body>
+</html>
