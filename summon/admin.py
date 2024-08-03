@@ -2,7 +2,7 @@ from django.utils import timezone
 from summon.models import Summon, SummonForm
 #from summon.reminder import Reminder
 from django.contrib import admin
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 import datetime
 from django.forms.formsets import formset_factory
 from django.core import serializers
@@ -13,7 +13,7 @@ def print_list(modeladmin,request,queryset):
     list_display=('sNo','partyName','incaseOf','status','IssueDate','DueDate','isDue',)
     data = serializers.serialize( "python", queryset,fields=list_display )
     print (data)
-    return render_to_response('printList.html',{'forlist': data,'fieldList':list_display})   
+    return render(request,'printList.html',{'forlist': data,'fieldList':list_display})   
 print_list.short_description="List Print"
 
 def print_list2(modeladmin,request,queryset):
@@ -24,13 +24,13 @@ def print_list2(modeladmin,request,queryset):
         form=SummonForm(instance=obj)
         data.append(form)
     print(data)
-    return render_to_response('printList.html',{'forlist': data,'fieldList':list_display})   
+    return render(request,'printList.html',{'forlist': data,'fieldList':list_display})   
 print_list2.short_description="List Print2"
 
 def print_list3(modeladmin,request,queryset):
     print("coming in print_list3 ")
     list_display=('sNo','partyName','incaseOf','status','IssueDate','DueDate','isDue',)
-    return render_to_response('printList.html',{'forlist': queryset,'fieldList':list_display})   
+    return render(request,'printList.html',{'forlist': queryset,'fieldList':list_display})   
 print_list3.short_description="List Print3"
 
 
@@ -39,7 +39,7 @@ def print_summon(modeladmin,request,queryset):
     print("coming in print_summon ")
     for obj in queryset:
         pass;
-    return render_to_response('summon.html',{'SummonName': obj})   
+    return render(request,'summon.html',{'SummonName': obj})   
 print_summon.short_description="print summon"
 
 def add_penalty(modeladmin,request,queryset):
@@ -51,13 +51,13 @@ def add_penalty(modeladmin,request,queryset):
             obj.p1 =timezone.now().date();
             obj.DueDate=obj.p1+datetime.timedelta(days=7)
             obj.save();  
-            return render_to_response('penalty.html',{'SummonName': obj})           
+            return render(request,'penalty.html',{'SummonName': obj})           
         elif (obj.p2==None):
             print("coming in add_penality 2")
             obj.p2 =timezone.now().date();
             obj.DueDate=obj.p2+datetime.timedelta(days=7);
             obj.save();
-            return render_to_response('penalty.html',{'SummonName': obj})
+            return render(request,'penalty.html',{'SummonName': obj})
         else:
             msg="Two penalty are already added. CANNOT ADDED MORE"
     modeladmin.message_user(request,"%s"%msg)
@@ -109,13 +109,13 @@ def reminder_letter(modeladmin,request,queryset):
             obj.reminder1 =timezone.now().date();
             obj.DueDate=obj.reminder1+datetime.timedelta(days=7)
             obj.save();  
-            return render_to_response('reminder.html',{'SummonName': obj})           
+            return render(request,'reminder.html',{'SummonName': obj})           
         elif (obj.reminder2==None):
             print("coming in reminder_telephone 2")
             obj.reminder2 =timezone.now().date();
             obj.DueDate=obj.reminder2+datetime.timedelta(days=7);
             obj.save();
-            return render_to_response('summon.html',{'SummonName': obj})   
+            return render(request,'summon.html',{'SummonName': obj})   
         else:
                 msg="Two letter reminders are already done. CANNOT ADDED MORE"
         modeladmin.message_user(request,"%s"%msg)

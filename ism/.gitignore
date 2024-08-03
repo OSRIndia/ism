@@ -1,0 +1,71 @@
+# Ignore complied files
+# Environment files
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller / cx_Freeze
+*.manifest
+*.spec
+
+# IDE and editor files
+*.idea/
+.vscode/
+
+# Test coverage / reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.pytest_cache/
+cover/
+
+# Temporary scratch files
+*.py~
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media files
+# This might be needed if you don't use a media storage service
+# and want to keep track of uploaded media in version control.
+# Consider using a dedicated service for production.
+media/*
+
+# Static files
+# If you're using a static file storage service, you probably
+# don't want to track these in version control. 
+# Uncomment if applicable.
+# static/*
+
+# Local documentation
+docs/_build/

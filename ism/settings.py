@@ -1,4 +1,10 @@
 # Django settings for ism project.
+import os
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+print("BASE_DIR " + str(BASE_DIR))
 
 DEBUG=True
 TEMPLATE_DEBUG=DEBUG
@@ -9,10 +15,13 @@ ADMINS=(
 
 MANAGERS=ADMINS
 
+print("Path of software")
+print(os.path.join(BASE_DIR,'/resources/ism.db'))
+
 DATABASES={
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',# Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': r'C:/ank/poc/ism/resources/ism.db',# Or path to database file if using sqlite3.
+        'NAME':  str(BASE_DIR)+'/resources/ism.db',# Or path to database file if using sqlite3.
         'USER': 'admin',# Not used with sqlite3.
         'PASSWORD': 'admin',# Not used with sqlite3.
         'HOST': 'admin',# Set to empty string for localhost. Not used with sqlite3.
@@ -91,7 +100,7 @@ TEMPLATE_LOADERS=(
 #     'django.template.loaders.eggs.Loader',
 )
 
-MIDDLEWARE_CLASSES=(
+MIDDLEWARE=(
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,13 +115,7 @@ ROOT_URLCONF='ism.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION='ism.wsgi.application'
 
-TEMPLATE_DIRS=(
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    "C:/ank/poc/ism/templates",
-    
-)
+
 
 INSTALLED_APPS=(
     'django.contrib.auth',
@@ -153,3 +156,20 @@ LOGGING={
         },
     }
 }
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+  # Adjust the path as needed
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]

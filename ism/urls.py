@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
+from django.urls import path, include
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-     url(r'^$', 'ism.views.home', name='home'),
-#     url(r'^movie/', include('movie.urls')),
-     url(r'^admin/', include(admin.site.urls)),
-)
+
+urlpatterns = [
+       path(r'^$', include('summon.urls')),
+       path('admin/', admin.site.urls),
+]

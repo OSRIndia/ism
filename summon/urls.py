@@ -1,5 +1,7 @@
-#from django.conf.urls import patterns, include, url
-#
-#urlpatterns = patterns('',
-#   url(r'^$', 'movie.views.home',name='moviehome'),
-#)
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path("", views.home, name="home"),
+]
